@@ -1,5 +1,5 @@
 {
-  "name": "ergo",
+  "name": "jsinf",
   "version": "0.1.0",
   "description": "A JSINF reference implementation",
   "main": "jsinf.js",
@@ -12,7 +12,9 @@
   },
   "keywords": [
     "JSON",
-    "YAML"
+    "YAML",
+    "JSINF",
+    "INI"
   ],
   "author": "cmroanirgo",
   "license": "MIT",
