@@ -101,17 +101,12 @@ And can have single blank lines in it.
 becomes:
 ```
 {
-	value: "I am some\ntext that..."
+	"section": {
+		"value": "I am some\ntext that..."
+	}
 }
 ```
 
-You can change the property name that is used:
-
-```
-// use 'default' as the default.
-var inf_data = jsinf(inf_file, { default_key: 'default'}); 
-console.log(inf_data.section['default']); // prints 'I am some...'
-```
 
 ### Block Default Value ###
 
@@ -129,11 +124,31 @@ that runs until --- is found on it's own line
 ---
 ```
 
+*Note:*
 
+You can change the property name that is used:
+
+```
+// use 'text' as the default.
+var inf_data = jsinf(inf_file, { default_key: 'text'}); 
+console.log(inf_data.section.text); // prints 'I am some...'
+```
+
+
+becomes:
+
+```
+{
+	"section": {
+		"name" : "John D. Smith"
+		"text": "I am some\ntext that..."
+	}
+}
+```
 *Note:*
 
 * The characters sequence used will be configurable in v0.1.2 and later.
-* It otherwise the same as 'Default Value'
+
 
 
 
