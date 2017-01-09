@@ -41,22 +41,6 @@ function _reMakeA(re, reTextA, reWithA) {
 }
 
 
-// The RegExps
-var re_NATURAL_NAME = /[\w\-\.\/]*[\w]/ 
-var re_WHITESP      = /[\s\r\n]*/
-var re_SECTION_NAME = /[\w]*?[\w\-\.\/ ]*[\w]/			// a natural-name with spaces in the middle are allowed
-var re_COMMENT      = /^[#;](.*)\r?\n?/
-var re_SECTION      = _reMake(/^\[(section-name)\]\s*\r?\n?/, 'section-name', re_SECTION_NAME);
-var re_KEY          = _reMake(/^(natural-name)\s*(?=\=)/, 'natural-name', re_NATURAL_NAME);
-var re_LINE_STARTERS= _reMakeA(/comment|key|section|\-{3,}/, 
-								['comment','key','section'],
-								[re_COMMENT, re_KEY, re_SECTION])
-var re_CODE_VALUE   = /^\=\s*\{\s*(.*)?\}\s*\r?\n?/;
-var re_ARRAY_VALUE   = /^\=\s*\[\s*(.*)?\]\s*\r?\n?/;
-var re_VALUE        = _reMake(/^\=\s*(\b[\s\S]*?)\s*\r?\n\s*(?=line-starters|\r?\n|[\s\r\n]*$)/, 'line-starters', re_LINE_STARTERS);
-var re_DEFAULT_VALUE= _reMake(/^([\s\S]*?)\s*\r?\n\s*(?=line-starters|[\s\r\n]*$)/, 'line-starters', re_LINE_STARTERS);
-var re_ESCAPED_BLOCK= /^\-{3,}\s*\r?\n([\s\S]*?)\s*\r?\n(?:\-{3,}|[\s\r\n]*$)/
-
 
 
 function _ensureSectionsExist(root, section_name, divider) {
@@ -113,6 +97,26 @@ function _jsinf(text, options) {
 
 	var log = options.log || function() { }
 	if (log === true) log = console.log;
+
+
+	// TODO. allow changing block start/end sequence (currently ---)
+
+	// The RegExps
+	var re_NATURAL_NAME = /[\w\-\.\/\#\$\\]*[\w]/ 
+	var re_WHITESP      = /[\s\r\n]*/
+	var re_SECTION_NAME = /[\w]*?[\w\-\.\/ \#\$\\]*[\w]/			// a natural-name with spaces in the middle are allowed
+	var re_COMMENT      = /^[#;](.*)\r?\n?/
+	var re_SECTION      = _reMake(/^\[(section-name)\]\s*\r?\n?/, 'section-name', re_SECTION_NAME);
+	var re_KEY          = _reMake(/^(natural-name)\s*(?=\=)/, 'natural-name', re_NATURAL_NAME);
+	var re_LINE_STARTERS= _reMakeA(/comment|key|section|\-{3,}/, 
+									['comment','key','section'],
+									[re_COMMENT, re_KEY, re_SECTION])
+	var re_CODE_VALUE   = /^\=\s*\{\s*(.*)?\}\s*\r?\n?/;
+	var re_ARRAY_VALUE   = /^\=\s*\[\s*(.*)?\]\s*\r?\n?/;
+	var re_VALUE        = _reMake(/^\=\s*(\b[\s\S]*?)\s*\r?\n\s*(?=line-starters|\r?\n|[\s\r\n]*$)/, 'line-starters', re_LINE_STARTERS);
+	var re_DEFAULT_VALUE= _reMake(/^([\s\S]*?)\s*\r?\n\s*(?=line-starters|[\s\r\n]*$)/, 'line-starters', re_LINE_STARTERS);
+	var re_ESCAPED_BLOCK= /^\-{3,}\s*\r?\n([\s\S]*?)\s*\r?\n(?:\-{3,}|[\s\r\n]*$)/
+
 
 	log("re_NATURAL_NAME   " + re_NATURAL_NAME.source )
 	log("re_SECTION_NAME   " + re_SECTION_NAME.source )
