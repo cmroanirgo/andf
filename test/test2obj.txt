@@ -1,0 +1,51 @@
+{
+"section1 - keys": {
+	"s1.key.1": "value 1\ns1.key 2 = is invalid and becomes part of s1.key.1"
+	, "s1.key-3": "value 3"
+	, "s1/key/4": "value4"
+}
+
+, "section2 - comments": {
+	"s2key1": "value #comment4. this is not a comment, but is part of s2key1"
+}
+
+, "section3 - is empty" : { }
+, "section4 - is also empty": { }
+, "section5": {
+	"sub section 1": {
+		"s5_key_1": "a nested value 1"
+	}
+}
+
+, "section6": {
+	"sub 1": {
+		"sub lvl2":{
+			"sub3": {
+				" sub4-preceeded-by-a-space": {
+					"s6_key_1": "value 1 for deeply nested"
+				}
+			}
+
+			, "s6_key_2": "value 1 for a higher level, but \ncomes after the nested sub4 value"
+		}
+	}
+}
+
+, "section7": {
+	"value": "This is one block of text assigned to the default value,\nwhich is 'value'\n\nAnd keeps going\n\nfor some =\ntime"
+}
+
+, "section8": {
+	"value": "This block explicitly sets the\n\n\nboundaries of the text\n\n#comments and\nkey=value are simply ignored\nThe final block boundary ---, is not used here."
+}
+
+, "section9": {
+	"value": "This block of text is the \"value\" for section 9,\noverwriting the existing value"
+}
+
+
+, "section10": { 
+	"value": "But this block of text is the final value\nin the multiline \nwars of section 10."
+}
+
+}

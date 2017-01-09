@@ -1,0 +1,65 @@
+[section1 - keys]
+s1.key.1 = value 1
+s1.key 2 = is invalid and becomes part of s1.key.1
+s1.key-3 = value 3
+  s1/key/4=value4
+[section2 - comments]
+#comment 1. this is a comment
+   #comment 2. and this
+;comment 3. and this is too
+s2key1 = value #comment4. this is not a comment, but is part of s2key1
+  #comment 5. This is a comment close to a key
+
+[section3 - is empty]
+[section4 - is also empty]
+[section5.sub section 1]
+s5_key_1 = a nested value 1
+[section6.sub 1.sub lvl2.sub3. sub4-preceeded-by-a-space]
+s6_key_1 = value 1 for deeply nested
+
+[section6.sub 1.sub lvl2]
+s6_key_2 = value 1 for a higher level, but 
+comes after the nested sub4 value
+
+[section7]
+This is one block of text assigned to the default value,
+which is 'value'
+
+And keeps going
+
+for some =
+time
+[section8]
+---
+This block explicitly sets the
+
+
+boundaries of the text
+
+#comments and
+key=value are simply ignored
+The final block boundary ---, is not used here.
+
+---
+
+[section9]
+---
+This section has two blocks of text, both of which
+are set to the same value. Strange, but acceptable
+. The last one will win
+---
+This block of text is the "value" for section 9,
+overwriting the existing value
+
+[section10]
+This section, takes it another step
+and has three sections, all vying for the same value
+---
+And this is the second block which will also 
+
+not 'pass the mustard'
+---
+value = 
+But this block of text is the final value
+in the multiline 
+wars of section 10.

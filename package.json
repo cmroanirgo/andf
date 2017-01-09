@@ -1,0 +1,27 @@
+{
+  "name": "ergo",
+  "version": "0.1.0",
+  "description": "A JSINF reference implementation",
+  "main": "jsinf.js",
+  "scripts": {
+    "test": "mocha test --require test/helpers/chai.js --require test/helpers/loadTestFilesFn.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmroanirgo/jsinf.git"
+  },
+  "keywords": [
+    "JSON",
+    "YAML"
+  ],
+  "author": "cmroanirgo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cmroanirgo/jsinf/issues"
+  },
+  "homepage": "https://github.com/cmroanirgo/jsinf#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
