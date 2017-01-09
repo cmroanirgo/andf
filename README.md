@@ -131,23 +131,25 @@ You can change the property name that is used:
 ```
 // use 'text' as the default.
 var inf_data = jsinf(inf_file, { default_key: 'text'}); 
-console.log(inf_data.section.text); // prints 'I am some...'
+console.log(inf_data.section.text); // prints 'I am a block\n\n...'
 ```
 
 
-becomes:
+The data would look like:
 
 ```
 {
 	"section": {
 		"name" : "John D. Smith"
-		"text": "I am some\ntext that..."
+		"text": "I am a block\n\n..."
 	}
 }
 ```
+
 *Note:*
 
 * The characters sequence used will be configurable in v0.1.2 and later.
+* There can only be one block per section. If multiple are detected, the last one is used.
 
 
 
