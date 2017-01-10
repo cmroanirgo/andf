@@ -21,7 +21,7 @@
 	"sub 1": {
 		"sub lvl2":{
 			"sub3": {
-				" sub4-preceeded-by-a-space": {
+				"sub4-preceeded-by-a-space": {
 					"s6_key_1": "value 1 for deeply nested"
 				}
 			}

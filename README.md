@@ -33,7 +33,7 @@ value2 = some 3rd value
 `;
 
 
-var inf_data = jfinf(inf_file);
+var inf_data = jfinf.decode(inf_file);
 console.log(inf_data.section.value1); // prints 'a value';
 ```
 
@@ -66,7 +66,7 @@ The default seperator is a dot '.', however you can change it easily:
 
 ```
 // use # as a sub section divider.
-var inf_data = jsinf(inf_file, { subsection_divider: '#'}); 
+var inf_data = jsinf.decode(inf_file, { subsection_divider: '#'}); 
 ```
 
 *Note:*
@@ -130,7 +130,7 @@ You can change the property name that is used:
 
 ```
 // use 'text' as the default.
-var inf_data = jsinf(inf_file, { default_key: 'text'}); 
+var inf_data = jsinf.decode(inf_file, { default_key: 'text'}); 
 console.log(inf_data.section.text); // prints 'I am a block\n\n...'
 ```
 

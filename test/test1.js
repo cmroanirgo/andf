@@ -1,5 +1,5 @@
 
-var jsinf = require('../jsinf.js');
+var jsinf = require('../jsinf.js').decode;
 const util = require('util');
 
 describe('Checks a single file', function() {
@@ -111,7 +111,7 @@ to forget the 3 dashes below, if the end of the file is reached.`
 
 	, final: {
 		footer: {
-			'some.key': null
+			'some.key': ''
 			, value: `This is the last block of text. 
 This is valid.`
 

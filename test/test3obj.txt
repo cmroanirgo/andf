@@ -1,0 +1,57 @@
+{
+
+"core":{
+	"excludesfile": "/Users/johnnie/.gitignore"
+    , "editor": "'subl' --wait"
+}
+, "user": {
+	"name": "john"
+	, "email": "john.doe@somewhere.com"
+}
+
+, "push": {
+	"default": "matching"
+}
+, "diff": {
+	"tool": "sourcetree"
+}
+, "merge": {
+        "keepBackup": "false"
+        , "tool": "sourcetree"
+}
+, "difftool": {	
+	"sourcetree": {
+		"cmd": "/Applications/p4merge.app/Contents/MacOS/p4merge \\\"$LOCAL\\\" \\\"$REMOTE\\\""
+		, "path": ""
+	}
+	, "diffmerge": {
+		"cmd": "diffmerge \\\"$LOCAL\\\" \\\"$REMOTE\\\""
+	}
+	, "custom-p4m": {
+		"cmd": "/Applications/p4merge.app/Contents/Resources/launchp4merge \"$PWD$LOCAL\" \"$PWD$REMOTE\""
+    	, "keepTemporaries": "false"
+    	, "trustExitCode": "false"
+    	, "keepBackup": "false"
+    }
+}
+, "mergetool":{
+	"sourcetree": {
+		"cmd": "/Applications/p4merge.app/Contents/MacOS/p4merge \\\"$BASE\\\" \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$MERGED\\\""
+		, "trustExitCode": "true"
+	}
+	, "diffmerge": {
+		"cmd": "\"diffmerge --merge --result=\\\"$MERGED\\\" \\\"$LOCAL\\\" \\\"$(if test -f \\\"$BASE\\\"; then echo \\\"$BASE\\\"; else echo \\\"$LOCAL\\\"; fi)\\\" \\\"$REMOTE\\\"\""
+		, "trustExitCode": "true"
+	}
+	, "custom-p4m": {
+    	"cmd": "/Applications/p4merge.app/Contents/Resources/launchp4merge \"$PWD/$BASE\" \"$PWD/$REMOTE\" \"$PWD/$LOCAL\" \"$PWD/$MERGED\""
+    	, "keepTemporaries": "false"
+    	, "trustExitCode": "false"
+    	, "keepBackup": "false"
+    }
+}
+, "commit": {
+	"template": "/Users/johnnie/.stCommitMsg"
+}
+
+}

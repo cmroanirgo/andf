@@ -18,7 +18,7 @@ var data = loadTestFiles(__filename);
 
 describe('Checks '+path.basename(data.source_filename)+' against '+path.basename(data.compare_filename), function() {
 	it('Compares whole structure', function() {
-		var obj = jsinf(data.source_data);
+		var obj = jsinf(data.source_data, {subsection_divider: " "});
 
 		/*
 		log("\n\n\nWe expect this data: ")
