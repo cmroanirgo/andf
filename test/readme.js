@@ -8,6 +8,69 @@ describe('Checks the examples in the readme for consistency', function() {
 		
 		assert.deepEqual(obj, {'root-level-key':'root level value'})
 	})
+
+
+	it('Quick look example', function() {
+		var obj = jsinf(`
+default_property = default value
+
+[section1]
+key1 = value1
+key2 = value2
+
+[section2]
+# this is a comment.
+key1 = value3
+
+[section2.nested]
+#A comment for a nested object
+nested_key = A
+value that
+runs over many lines,
+but can't have a blank line.
+
+---
+A block of text that gets assigned
+to the property called 'value'
+
+You can put pretty much anything in
+here. You don't need the final --- if the 
+end of the file is reached.
+
+#this is not a comment. It stays in the 
+#with this text block unmolested.
+---
+		`);
+		
+		assert.deepEqual(obj, {
+		default_property: 'default value'
+
+	    , section1: {
+	        key1 : "value1"
+	        ,key2: "value2"
+	    }
+	    , section2: {
+	    	key1: "value3"
+	    	, nested: {
+	    		nested_key: `A
+value that
+runs over many lines,
+but can't have a blank line.`
+			, value: `A block of text that gets assigned
+to the property called 'value'
+
+You can put pretty much anything in
+here. You don't need the final --- if the 
+end of the file is reached.
+
+#this is not a comment. It stays in the 
+#with this text block unmolested.`
+	    	}
+	    }
+		})
+	})
+
+
 	it('Example 1', function() {
 		var obj = jsinf(`
 			[section]

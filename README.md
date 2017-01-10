@@ -7,6 +7,51 @@ This comprises the reference decoder for jsinf format.
 [![build status](https://secure.travis-ci.org/cmroanirgo/jsinf.svg)](http://travis-ci.org/cmroanirgo/jsinf)
 
 
+Are you looking for something _other_ than YAML or JSON for your configuration files? Perhaps JSINF is an answer. If you know the standard .INI files of windows, then this copes with those... but it also does a lot more:
+
+* Returns the config as a standard Javascript object, that you can easily convert to JSON if you wish.
+* Supports nested objects (unlike a standard .INI file). eg, can read .gitignore.
+* Supports values that extend over multiple lines!
+* Supports 'default' blocks. That is, you don't even need to start with `some_property = `!!!
+
+Note: Currently the api only decodes. It will eventually be able to write config as well.
+
+## A Quick Look at the Format
+
+```
+default_property = default value
+
+[section1]
+key1 = value1
+key2 = value2
+
+[section2]
+# this is a comment.
+key1 = value3
+
+[section2.nested]
+#A comment for a nested object
+nested_key = A
+value that
+runs over many lines,
+but can't have a blank line.
+
+---
+A block of text that gets assigned
+to the property called 'value'
+
+You can put pretty much anything in
+here. You don't need the final --- if the 
+end of the file is reached.
+
+#this is not a comment. It stays in  
+#with this text block unmolested.
+---
+```
+
+
+
+
 ## Installation
 
 Easiest is with npm, in an existing npm project:
