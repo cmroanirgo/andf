@@ -148,8 +148,15 @@ The data would look like:
 
 *Note:*
 
-* The characters sequence used will be configurable in v0.1.2 and later.
 * There can only be one block per section. If multiple are detected, the last one is used.
+
+You can change the separator sequence with:
+
+```
+// Change the divider to 5 (or more) consecutive asterisks.
+var inf_data = jsinf.decode(inf_file, { block_divider: '\\*{5,}'}); 
+```
+
 
 
 
