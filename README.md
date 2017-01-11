@@ -209,6 +209,7 @@ The following options are available:
 
 ```
   default_key: 'value'		// This specifies where 'default values' are placed. Default is 'value'
+
 , subsection_divider: '.'   // This specifies how we split a [section.sub section.subsub section]
 	 						// If Empty, does not split at all, and everything is just a 'section'
 	 						// Can be a function:
@@ -217,6 +218,7 @@ The following options are available:
 		return section.split(' ').map(function(name) {  // splits on a space
 			return name.replace(/^\"(.*?)\"$/, '$1') }); // trims out sub-section surrounding quotes
 		}
+
 , subsection_nameclean: 	// This allows the 'clean up' of a sub-section name.
 	 						// By default the string is trimmed of whitespace and (matching) surrounding quotes
 	 						// eg.
@@ -237,13 +239,17 @@ key, comment & section_name charsets
 , valid_section_chars: /[\w\'\"]*?[\w\-\.\/ \#\$\\\'\"]*[\w\'\"]/ 	// TAKE CARE! don't use an equals!
 
 , valid_comment_chars: "#;"
-, valid_comment_chars: /^[#;](.*)\r?(?:\n|$)/ 
+, valid_comment_chars: /^[#;](.*)(?:\n|$)/ 
 
 , options.block_divider: '\\-{3,}' // also '\\-\\-\\-+'
-, options.block_divider: /\-{3-}/
+, options.block_divider: /\-{3,}/
 
 , allow_code: true			// Allow values with code blocks. eg { (123+4).toString() + (new Date()).toString() + " ok!"}
-, allow_arrays: true		// allow values as an array: eg [ value1, value2, value3 ]
+							// If concerned with security/ config is from an untrusted source: SET THIS TO FALSE!
+
+, allow_arrays: true		// allow values as an array: eg [ value1, value2, value3 ]. 
+							// Limited usage. Only for simple Array types (without commas). Is equal to:
+							//	"value1, value2, value3".split(',').map(function(item) { return item.replace(/^\s*(.*?)\s*$/,'$1')})
 
 , log: true					// Enable logging of internals. Good for debugging, but that's about it.
 , log: function(str) { console.log(str); }

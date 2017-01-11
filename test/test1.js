@@ -26,6 +26,7 @@ describe('Checks a single file', function() {
 var file1 = `title = Welcome to my homepage                         
 uri = index.html                                       
 date={   (new Date()).toString + " OK"; }              
+an_array= [ i am an, array of 3 values,      trimmed of spaces     ]        
 metakeys = Some keys,other keys                        
 metadesc =                                             
 I like writing blogs and learning                      
@@ -77,6 +78,7 @@ var file1obj = {
 	title: 'Welcome to my homepage'
 	, uri: 'index.html'
 	, date: (new Date()).toString + " OK"
+	, an_array: [ "i am an", "array of 3 values", "trimmed of spaces" ]
 	, metakeys: 'Some keys,other keys'
 	, metadesc: `I like writing blogs and learning                      
 about myself. Trailing spaces are                      
