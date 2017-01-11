@@ -31,5 +31,44 @@ describe('Checks '+path.basename(data.source_filename)+' against '+path.basename
 		assert.deepEqual(obj, data.compare_obj)
 
 	})
+	it('Uses alt divider string & cleanup #1', function() {
+		var nameCleanCount = 0;
+		var obj = jsinf(data.source_data, {
+			valid_comment_chars: /^\/\/.*(?:\n:$)/,
+			subsection_divider: function(section_name) {
+					return section_name.split(' ').map(function(name) { 
+				 			return name.replace(/^\"(.*?)\"$/, '$1') }); 
+				}
+			, subsection_nameclean: function(name) {
+				nameCleanCount++;
+				return name;
+			}
+			});
+
+		assert.deepEqual(obj, data.compare_obj)
+		assert.equal(nameCleanCount, 18)
+
+	})
+	it('Uses alt divider RegExp & cleanup #2', function() {
+		var nameCleanCount = 0;
+		var obj = jsinf(data.source_data, {
+			subsection_divider: / /
+			, subsection_nameclean: function(name) {
+				nameCleanCount++;
+				return name.replace( /^\"(.*?)\"$/, '$1');
+			}
+			});
+
+		assert.deepEqual(obj, data.compare_obj)
+		assert.equal(nameCleanCount, 18)
+	})
+	it('Catches use of unsafe input', function() {
+		var thrownMessage = 
+		assert.throws(function() {
+			var obj = jsinf(data.source_data, {
+				subsection_divider: /window.open/
+				});
+		}, "Bad food in 'subsection_divider'");
+	})
 });
 
