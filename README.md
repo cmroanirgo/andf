@@ -203,6 +203,51 @@ var inf_data = jsinf.decode(inf_file, { block_divider: '\\*{5,}'});
 ```
 
 
+## Options
+
+The following options are available:
+
+```
+  default_key: 'value'		// This specifies where 'default values' are placed. Default is 'value'
+, subsection_divider: '.'   // This specifies how we split a [section.sub section.subsub section]
+	 						// If Empty, does not split at all, and everything is just a 'section'
+	 						// Can be a function:
+							//	 .eg for a .gitconfig styled: [diff "difftool"]:
+, subsection_divider: function(section) { 
+		return section.split(' ').map(function(name) {  // splits on a space
+			return name.replace(/^\"(.*?)\"$/, '$1') }); // trims out sub-section surrounding quotes
+		}
+, subsection_nameclean: 	// This allows the 'clean up' of a sub-section name.
+	 						// By default the string is trimmed of whitespace and (matching) surrounding quotes
+	 						// eg.
+		function(name) { 
+			return name.replace( /^\"(.*?)\"$/, '$1');
+		}
+
+/*
+key, comment & section_name charsets
+ allows (some) control of what is ok and what is not
+ if a RegExp is defined, then full control is given (Unless careful, problems will ensue)
+*/
+, valid_key_chars: "-./\\#$'\""	// Word Characters A-Za-z90-9_ are included by default. 
+								// Use a RegExp for full control (TAKE CARE! don't use an equals!):
+, valid_key_chars: /[\w\-\.\/\#\$\\\'\"]*[\w]/ 
+
+, valid_section_chars: " -./\\#$'\"" // <== has a 'space' in there
+, valid_section_chars: /[\w\'\"]*?[\w\-\.\/ \#\$\\\'\"]*[\w\'\"]/ 	// TAKE CARE! don't use an equals!
+
+, valid_comment_chars: "#;"
+, valid_comment_chars: /^[#;](.*)\r?(?:\n|$)/ 
+
+, options.block_divider: '\\-{3,}' // also '\\-\\-\\-+'
+, options.block_divider: /\-{3-}/
+
+, allow_code: true			// Allow values with code blocks. eg { (123+4).toString() + (new Date()).toString() + " ok!"}
+, allow_arrays: true		// allow values as an array: eg [ value1, value2, value3 ]
+
+, log: true					// Enable logging of internals. Good for debugging, but that's about it.
+, log: function(str) { console.log(str); }
+```
 
 
 
