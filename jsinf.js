@@ -7,10 +7,18 @@
 
 "use strict";
 
-const _decode = require('./lib/jsinf-decode');
+const _parse = require('./lib/jsinf_parse');
+const _encode = require('./lib/jsinf_encode');
 
 module.exports = {
-	decode: _decode
+	  decode: _parse
+	, parse: _parse
+	, stringify: function(str, options) {
+		var data = _encode(str, options);
+		if (data.errors) throw new SyntaxError(data.errors.join('\n'));
+		return data.value;
+	}
+	, encode: _encode
 }
 
 

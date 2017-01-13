@@ -1,10 +1,10 @@
 
-var jsinf = require('../jsinf.js').decode;
+var jsinf = require('../jsinf.js');
 const util = require('util');
 
 describe('Checks a single file', function() {
 	it('Checks file1 default actions', function() {
-		var obj = jsinf(file1);
+		var obj = jsinf.parse(file1);
 
 		/*
 		console.log('\n\n\n\nWe Expect:\n')
@@ -18,6 +18,13 @@ describe('Checks a single file', function() {
 		assert.equal(obj.uri, file1obj.uri, 'Uri is ' + file1obj.uri)
 		assert.deepEqual(obj, file1obj, 'deeply equal')
 
+	})
+	it('Checks stringification', function() {
+		var obj = jsinf.parse(file1); // this is the above test
+		var str = jsinf.stringify(obj);
+		//console.log('stringified = \n\n\n'+str + '\n\n\n')
+		var obj2 = jsinf.parse(str);
+		assert.deepEqual(obj, obj2);
 	})
 });
 
