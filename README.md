@@ -14,12 +14,26 @@ Are you looking for something _other_ than YAML or JSON for your configuration f
 * Supports values that extend over multiple lines!
 * Supports 'default' blocks. That is, you don't even need to start with `some_property = `!!!
 
-Note: Currently the api only decodes. It will eventually be able to write config as well.
+The API, is similar to JSON with `parse` and `stringify`:
+
+```
+var jsinf = require('jsinf');
+...
+var obj = jsinf.parse(some_data);
+
+var text = jsinf.stringify(obj);
+
+```
+
+Note:
+
+* Of course, comments and whitespace are not retained when using `jsinf.stringify(jsinf.parse(some_data))`, but the data integrity will remain intact. (See the tests to verify this).
+
 
 ## A Quick Look at the Format
 
 ```
-default_property = default value
+a_property = some value
 
 [section1]
 key1 = value1
@@ -203,9 +217,9 @@ var inf_data = jsinf.decode(inf_file, { block_divider: '\\*{5,}'});
 ```
 
 
-## Options
+## Parse Options
 
-The following options are available:
+The following options are available when parsing:
 
 ```
   default_key: 'value'		// This specifies where 'default values' are placed. Default is 'value'
@@ -241,8 +255,8 @@ key, comment & section_name charsets
 , valid_comment_chars: "#;"
 , valid_comment_chars: /^[#;](.*)(?:\n|$)/ 
 
-, options.block_divider: '\\-{3,}' // also '\\-\\-\\-+'
-, options.block_divider: /\-{3,}/
+, block_divider: '\\-{3,}' // also '\\-\\-\\-+'
+, block_divider: /\-{3,}/
 
 , allow_code: true			// Allow values with code blocks. eg { (123+4).toString() + (new Date()).toString() + " ok!"}
 							// If concerned with security/ config is from an untrusted source: SET THIS TO FALSE!
@@ -250,6 +264,23 @@ key, comment & section_name charsets
 , allow_arrays: true		// allow values as an array: eg [ value1, value2, value3 ]. 
 							// Limited usage. Only for simple Array types (without commas). Is equal to:
 							//	"value1, value2, value3".split(',').map(function(item) { return item.replace(/^\s*(.*?)\s*$/,'$1')})
+
+, log: true					// Enable logging of internals. Good for debugging, but that's about it.
+, log: function(str) { console.log(str); }
+```
+
+##Stringify Options
+
+The following options are available when stringifying:
+
+```
+  default_key: 'value'		// This specifies where 'default values' are placed. Default is 'value'
+
+, subsection_divider: '.'   // This specifies how we split a [section.sub section.subsub section]
+	 						// (If Empty, does not split at all, and everything is just a 'section', NOT RECOMMENDED)
+
+
+, block_divider: '---'      // This MUST match the 'parse' regular expression, but must be a fixed string here
 
 , log: true					// Enable logging of internals. Good for debugging, but that's about it.
 , log: function(str) { console.log(str); }
