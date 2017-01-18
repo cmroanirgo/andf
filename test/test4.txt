@@ -1,0 +1,36 @@
+title = Themes for ergo-cms
+date = 18 Jan 2017 11:00
+metadesc = The quest of theme recycling
+
+###
+
+{{=[[ ]]=}}Like all things in the ergo-cms project, I feel it important that the __best solution__ should always be aimed for, rather than just 'getting it to work'. Unfortunately, when it comes to themes and templates, the internet world is in a bit of a mess. From WordPress themes and Jekyll themes and Start Bootstrap to html5up and beyond, they're all great places to start, but only if you know what you're doing (or you're running WordPress and Jeykll itself). I can't recall how many times I've circled this problem without finding a proper 'solution'. 
+
+I feel that there is *no* solution, because designers and website authors and users and developers all have conflicting ideas on what's great for their solution, without thinking of a bigger picture. Hence, a mess.
+
+Revisiting the problem for the __1000th__ time, I looked at Start Bootstrap and html5up themes again, and realised that although they _look_ fantastic, they are really not very good as a _foundation_ for your website, unless you're very conversant with HTML and CSS. Let's face it, if you're reading this, you're thinking "what's the problem?", but that's because you're not Joe the Plumber who's never needed to know anything about technology other than to _use_ it, like the way they'd _use_ their plumbing tools. A better example would be my two brothers, who would much rather search through a million themes looking for something that 'just works' for them. And they complain the whole time about it (of course, this is just a frustration thing on their part).
+
+So, the holy grail is to:
+
+* Provide a large swag of themes, without rewriting what others have already spent time with.
+* Provide easy ways for developers, designers and end users to all have their input into look and feel, but must be ready to go, 'out of the box', just like a WordPress theme, but without locking the end user out from tweaking things, if they feel up to it.
+
+This means I'll be writing some tools to 'convert' one theme to another (if such a thing hasn't already been done). Due to the popularity of Jekyll, due to github's support for it, it might be a good avenue to begin with.
+
+h2. The Jackal in Jekyll
+
+The problem with any cms is that it will use a different templating engine from anyone else. Even ergo-cms is a perfect example. Having seen the problems in templating with previous incarnations of ergo-cms, I find it humorous to find that Jekyll uses "Liquid":https://shopify.github.io/liquid/, simply because the syntax was very close to what I had written, nearly 10 years ago! That is, it has very _geeky_ syntax of @if something ... endif@, which I (ironically) took pains to not include in "Usematch":https://github.com/cmroanirgo/usematch! I feel that Mustache's @{{#content}} ... {{/content}}@ although having multiple meanings, is easier to work with from a designer and end-user perspective, who may not be quite so technically literate.
+
+That said, if I wish to 'embrace and extend' a Jekyll theme, there's not a lot of changes that need be made.
+
+However, the one thing that _has_ popped up when looking at the Liquid templating engine is it's support for whitespace removal (which is what Mustache _always_ does) and for which Usematch has a funtionality hole. That is, in a Jekyll template, you can see things like:
+
+bc. {%- if posts -%}
+	{{title}}
+{%- end if -%}
+
+What the '-' do is to instruct Liquid to strip out whitespace from around the tag itself. I think I'll add this as a feature to Usematch in the near future. And looking at it this way, I begin to understand why Mustache does it, by default.
+
+Until then, and until I make a _jekyll-to-usematch_ converter, I'm stuck at making templates by hand. _:sigh:_
+
+[[={{ }}=]]
